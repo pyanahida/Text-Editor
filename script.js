@@ -12,6 +12,8 @@ let nextId = 1;
 let statusTimer = null;
 let pressTimer = null;
 let longPressFired = false;
+let touchStartX = 0;
+let touchStartY = 0;
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -89,7 +91,11 @@ function startRename(tabEl, file) {
   nameEl.style.display = "none";
   tabEl.appendChild(input);
   input.focus();
-  input.select();
+  
+  // On mobile, select() may not work perfectly without a small timeout
+  setTimeout(function() {
+    input.select();
+  }, 10);
 
   let finished = false;
 
@@ -138,18 +144,38 @@ function attachTabEvents(tabEl, file) {
       longPressFired = false;
       return;
     }
+    // Prevent click if we are currently editing this tab
+    if (tabEl.querySelector(".file-tab-input")) {
+      return;
+    }
     switchTo(file.id);
   });
+
   tabEl.addEventListener("mousedown", function () {
     startPress(tabEl, file);
   });
-  tabEl.addEventListener("touchstart", function () {
-    startPress(tabEl, file);
-  }, { passive: true });
+  
   tabEl.addEventListener("mouseup", cancelPress);
   tabEl.addEventListener("mouseleave", cancelPress);
+
+  // Mobile specific touch events
+  tabEl.addEventListener("touchstart", function (e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    startPress(tabEl, file);
+  }, { passive: true });
+
+  tabEl.addEventListener("touchmove", function (e) {
+    const dx = Math.abs(e.touches[0].clientX - touchStartX);
+    const dy = Math.abs(e.touches[0].clientY - touchStartY);
+    // Cancel long press if user is scrolling horizontally or vertically
+    if (dx > 10 || dy > 10) {
+      cancelPress();
+    }
+  }, { passive: true });
+
   tabEl.addEventListener("touchend", cancelPress);
-  tabEl.addEventListener("touchmove", cancelPress);
+  tabEl.addEventListener("touchcancel", cancelPress);
 }
 
 function renderTabs() {
@@ -168,13 +194,23 @@ function renderTabs() {
     fileList.appendChild(tab);
   });
 
+  // Safely scroll into view only if there is an active element and it exists in DOM
   const activeTab = fileList.querySelector(".file-tab.active");
   if (activeTab) {
-    activeTab.scrollIntoView({ block: "nearest", inline: "nearest" });
+    try {
+      activeTab.scrollIntoView({ block: "nearest", inline: "nearest" });
+    } catch (e) {
+      // Ignore if browser doesn't support scrollIntoView options
+    }
   }
 }
 
 function addFile(name) {
+  const current = getActive();
+  if (current) {
+    current.content = editor.value;
+  }
+  
   const file = {
     id: nextId,
     name: uniqueName(name),
@@ -210,7 +246,7 @@ function saveText() {
   }
   file.content = editor.value;
 
-  let fileName = file.name.trim() || timeName();
+  let fileName = file.name.trim() || "untitled";
   if (!/\.txt$/i.test(fileName)) {
     fileName += ".txt";
   }
@@ -237,10 +273,6 @@ editor.addEventListener("input", function () {
 });
 
 newFileButton.addEventListener("click", function () {
-  const current = getActive();
-  if (current) {
-    current.content = editor.value;
-  }
   addFile(timeName());
 });
 
@@ -253,4 +285,5 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
-addFile(timeName());
+// Initialize with an untitled.txt file
+addFile("untitled.txt");
