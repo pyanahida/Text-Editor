@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 32px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f2f4f8;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  color: #1f2430;
+}
+
+.editor {
+  width: 100%;
+  max-width: 760px;
+  padding: 28px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(31, 36, 48, 0.12);
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.intro {
+  margin: 0 0 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #5b6472;
+}
+
+#editor {
+  width: 100%;
+  min-height: 320px;
+  padding: 14px 16px;
+  font-family: "Consolas", "Menlo", monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #1f2430;
+  background: #fbfcfe;
+  border: 1px solid #d3d9e3;
+  border-radius: 8px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+#editor:focus {
+  border-color: #4a7cf6;
+  box-shadow: 0 0 0 3px rgba(74, 124, 246, 0.18);
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+#save-button {
+  padding: 10px 26px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #4a7cf6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+#save-button:hover {
+  background: #3a67d8;
+}
+
+#save-button:active {
+  transform: translateY(1px);
+}
+
+.status {
+  font-size: 13px;
+  color: #2f9e63;
+  min-height: 18px;
+}
