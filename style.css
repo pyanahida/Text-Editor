@@ -1,11 +1,12 @@
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  padding: 32px 16px;
+  padding: 16px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -17,20 +18,20 @@ body {
 .editor {
   width: 100%;
   max-width: 760px;
-  padding: 28px;
+  padding: 20px;
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(31, 36, 48, 0.12);
+  box-shadow: 0 4px 16px rgba(31, 36, 48, 0.08);
 }
 
 h1 {
   margin: 0 0 8px;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
 }
 
 .intro {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   font-size: 14px;
   line-height: 1.6;
   color: #5b6472;
@@ -51,14 +52,24 @@ h1 {
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.file-list::-webkit-scrollbar {
+  height: 4px;
+}
+
+.file-list::-webkit-scrollbar-thumb {
+  background: #c4cdd9;
+  border-radius: 4px;
 }
 
 .file-tab {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
-  max-width: 180px;
-  padding: 7px 14px;
+  max-width: 150px;
+  padding: 8px 12px;
   font-size: 13px;
   color: #5b6472;
   background: #eef1f6;
@@ -85,10 +96,11 @@ h1 {
 .file-tab-name {
   overflow: hidden;
   text-overflow: ellipsis;
+  pointer-events: none; /* Let tab handle events */
 }
 
 .file-tab-input {
-  width: 110px;
+  width: 100px;
   padding: 2px 4px;
   font-family: inherit;
   font-size: 13px;
@@ -101,8 +113,8 @@ h1 {
 
 .new-file-button {
   flex: 0 0 auto;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   font-size: 20px;
   line-height: 1;
   color: #4a7cf6;
@@ -111,6 +123,9 @@ h1 {
   border-radius: 7px;
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .new-file-button:hover {
@@ -121,7 +136,7 @@ h1 {
 #editor {
   width: 100%;
   min-height: 320px;
-  padding: 14px 16px;
+  padding: 14px;
   font-family: "Consolas", "Menlo", monospace;
   font-size: 15px;
   line-height: 1.6;
