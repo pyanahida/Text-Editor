@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Text Editor</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="/icon.png">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="editor">
     <h1>Text Editor</h1>
-    <p class="intro">Type anything in the box below, then press Save to download it as a text file.</p>
+    <p class="intro">Create multiple files, switch between them with the tabs above, long press a tab to rename it, and press Save to download the active file as a .txt file.</p>
+    <div class="file-bar">
+      <div id="file-list" class="file-list"></div>
+      <button id="new-file-button" class="new-file-button" type="button" title="New file">+</button>
+    </div>
     <textarea id="editor" placeholder="Start typing here..." spellcheck="false"></textarea>
     <div class="actions">
       <button id="save-button" type="button">Save</button>
