@@ -36,6 +36,88 @@ h1 {
   color: #5b6472;
 }
 
+.file-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.file-list {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+}
+
+.file-tab {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  max-width: 180px;
+  padding: 7px 14px;
+  font-size: 13px;
+  color: #5b6472;
+  background: #eef1f6;
+  border: 1px solid #d3d9e3;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.file-tab:hover {
+  background: #e3e8f1;
+}
+
+.file-tab.active {
+  color: #ffffff;
+  background: #4a7cf6;
+  border-color: #4a7cf6;
+}
+
+.file-tab-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-tab-input {
+  width: 110px;
+  padding: 2px 4px;
+  font-family: inherit;
+  font-size: 13px;
+  color: #1f2430;
+  background: #ffffff;
+  border: 1px solid #4a7cf6;
+  border-radius: 4px;
+  outline: none;
+}
+
+.new-file-button {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  line-height: 1;
+  color: #4a7cf6;
+  background: #ffffff;
+  border: 1px solid #d3d9e3;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.new-file-button:hover {
+  background: #eef3ff;
+  border-color: #4a7cf6;
+}
+
 #editor {
   width: 100%;
   min-height: 320px;
