@@ -1,31 +1,32 @@
 # Text Editor
 
-A simple browser-based text editor built with plain HTML, CSS, and JavaScript.
+A simple, responsive, browser-based text editor built with plain HTML, CSS, and JavaScript. It supports multiple files, inline renaming, and saving to your local device.
 
 ## Features
 
-- Editable textarea for free-form typing
-- Save button that downloads the current content as a text file
-- File name pattern: `untitled${HHMMSS}.txt`
-- Timestamp is based on the local time in HHMMSS format
-- Keyboard shortcut: `Ctrl+S` or `Cmd+S` to save
-- No external dependencies or build tools required
+- **Multiple Files**: Create and manage multiple text files within a single session using the tab bar.
+- **Horizontal Scrolling Tabs**: The tab bar automatically scrolls horizontally when it contains too many files.
+- **Inline Renaming**: Long press (or long click) on any file tab to rename it. Press `Enter` to confirm or `Escape` to cancel.
+- **Smart Default Names**: New files are named using the current time in `HHMMSS` format by default (e.g., `143025.txt`). Duplicate names are automatically appended with a suffix (e.g., `143025-2.txt`).
+- **Download/Save**: Click the Save button or use `Ctrl+S` / `Cmd+S` to download the active file. The downloaded file will use the current tab's name and automatically append `.txt` if missing.
+- **Mobile Friendly**: Optimized touch interactions for long press and horizontal scrolling without triggering native text selection.
+- **No External Dependencies**: Pure vanilla JavaScript, HTML, and CSS.
 
 ## Usage
 
-1. Open `index.html` in a web browser.
+1. Open `index.html` in any modern web browser.
 2. Type or paste text into the textarea.
-3. Click the Save button to download the file.
-4. The downloaded file will be named like `untitled143025.txt`.
+3. Click the `+` button to create a new file.
+4. Long press (hold) on a file tab to rename it.
+5. Click the Save button to download the current file as a `.txt` document.
 
 ## File Structure
 
-- `index.html` - page structure
-- `style.css` - page styling
-- `script.js` - save logic and file name generation
+- `index.html` - Page structure and layout.
+- `style.css` - Page styling and responsive design.
+- `script.js` - State management, file operations, and download logic.
 
 ## Notes
 
-- The saved file is generated entirely in the browser.
-- No text is uploaded to any server.
-- The timestamp uses the local time of the user's device.
+- All data is kept in the browser's memory. Refreshing the page will clear all files and content.
+- No text is uploaded to any server. The save process is handled entirely client-side via Blob and Object URL.
